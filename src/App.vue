@@ -3,6 +3,24 @@
     <router-view/>
   </div>
 </template>
+<script>
+  import { mapActions, mapGetters } from 'vuex';
+  import { generateListAlbums } from '@/utils/seedData';
+
+  export default {
+    methods: {
+      ...mapActions({
+        'getListAlbums': 'GENERATE_ALBUMS'
+      })
+    },
+     computed: {
+      ...mapGetters(['listAlbums']),
+    },
+    mounted(){
+      this.getListAlbums()
+    } 
+  }
+</script>
 
 <style lang="scss">
 #app {

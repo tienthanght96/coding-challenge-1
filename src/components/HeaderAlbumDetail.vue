@@ -29,6 +29,17 @@
             </div>
           </div>
         </div>
+         <div class="columns is-mobile header-bottom">
+          <div class="column is-6 header-bottom__left">
+            <p style="margin-bottom: 0">Content here</p>
+          </div>
+          <div class="column has-text-right is-6 header-bottom__right">
+            <ul class="meta-list">
+              <li class="meta-list__item">2 Photos</li>
+              <li class="meta-list__item">2 Videos</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -57,6 +68,29 @@
         cursor: pointer;
         .favorite-text {
           font-size: 14px;
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+  .header-bottom {
+    .column {
+      padding: 0 0.75rem;
+    }
+    &__right {
+      ul {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        li {
+          list-style: none;
+          margin: 0;
+          padding: 0 5px;
+          font-size: 14px;
+          &:not(:last-child) {
+            border-right: 1px solid #ddd;
+          }
         }
       }
     }

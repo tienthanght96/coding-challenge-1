@@ -3,7 +3,7 @@
     <div class="card-image">
       <figure class="image is-4by3">
         <router-link to="/album-detail">
-          <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+          <img v-if="mainImage" :src="mainImage" :alt="album.title">
         </router-link>
       </figure>
     </div>
@@ -11,9 +11,9 @@
       <div class="media">
         <div class="media-content">
           <p class="title is-6">
-            <router-link to="/album-detail">John Smith</router-link>
+            <router-link :to="'/album-detail/' + album.id">{{ album.title }}</router-link>
           </p>
-          <p class="subtitle is-6">12 photos, 2 videos</p>
+          <p class="subtitle is-6" v-if=" album.photos">{{ album.photos.length }} photos</p>
         </div>
       </div>
     </div>
@@ -35,14 +35,25 @@
 
 <script>
   export default {
+    props: {
+      album: Object
+    },
     data(){
       return {
         isFavoriting: false,
       }
     },
+    computed: {
+      mainImage() {
+        const { photos } = this.album;
+        if(photos && Array.isArray(photos) && photos[0]) {
+          return photos[0].imageUrl;
+        }
+        return '';
+      }
+    },
     methods: {
       onFavorite(){
-        console.log('12312')
       }
     },
   }
@@ -51,6 +62,7 @@
   .card {
     &--album-custom {
       border-radius: 5px;
+      height: 100%;
     }
     &-image {
       img {

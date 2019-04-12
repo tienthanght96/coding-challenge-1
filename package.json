@@ -9,6 +9,7 @@
   "dependencies": {
     "buefy": "^0.7.4",
     "core-js": "^2.6.5",
+    "faker": "^4.1.0",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"

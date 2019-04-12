@@ -2,7 +2,7 @@
   <div class="home">
     <b-tabs v-model="active_tab" class="tabs--custom">
       <b-tab-item label="Albums">
-          <ListAlbums />
+        <list-albums :listAlbums="listAlbums" />
       </b-tab-item>
 
       <b-tab-item label="Media">
@@ -16,20 +16,24 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import ListAlbums from '@/components/ListAlbums.vue'
+  import { mapGetters } from 'vuex';
+  // @ is an alias to /src
+  import ListAlbums from '@/components/ListAlbums.vue'
 
-export default {
-  name: 'home',
-  components: {
-    ListAlbums
-  },
-  data() {
-    return {
-      active_tab: 0,
-    }
+  export default {
+    name: 'home',
+    components: {
+      ListAlbums
+    },
+    data() {
+      return {
+        active_tab: 0,
+      }
+    },
+    computed: {
+      ...mapGetters(['listAlbums']),
+    },
   }
-}
 </script>
 
 <style lang="scss">
