@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <b-tabs v-model="active_tab" class="tabs--custom">
-      <b-tab-item label="Albums">
+      <b-tab-item :label="`Albums(${listAlbums.length})`">
         <list-albums :listAlbums="listAlbums" />
       </b-tab-item>
 

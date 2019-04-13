@@ -19,24 +19,28 @@
     </div>
     <footer class="card-footer">
       <p class="card-footer-item">
-        <b-button
-          size="is-small"
-          icon-pack="fas"
-          icon-left="star"
-          outlined
-          @click="onFavorite"
+        <span
+          class="btn-favorite"
+          @click="onToggleFavorite(album.id)"
         >
-          Favorite
-        </b-button>
+          <b-icon
+            pack="fas"
+            icon="star"
+            size="is-small"
+            :type="album.isFavorite ? 'is-warning' : ''"
+          >
+          </b-icon>
+        </span>
       </p>
     </footer>
   </div>
 </template>
 
 <script>
+  import { mapMutations } from 'vuex'
   export default {
     props: {
-      album: Object
+      album: Object,
     },
     data(){
       return {
@@ -53,8 +57,9 @@
       }
     },
     methods: {
-      onFavorite(){
-      }
+      ...mapMutations({
+        'onToggleFavorite': 'TOGGLE_FAVORITE_ALBUM'
+      })
     },
   }
 </script>
@@ -70,9 +75,25 @@
         border-top-right-radius: 5px;
       }
     }
+    &-content {
+      min-height: 120px;
+      max-height: 150px;
+      overflow: hidden;
+      a {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        color: #666;
+      }
+    }
     &-footer {
       &-item {
         justify-content: flex-end;
+        .btn-favorite {
+          cursor: pointer;
+        }
       }
     }
   }

@@ -2,22 +2,26 @@
   <div class="card card--header-album-detail">
     <div class="card-content">
       <div class="content">
-        <div class="columns is-mobile header-top">
-          <div class="column is-6 header-top__left">
-            <h3 class="title left" style="margin-bottom: 0">2018 SEO</h3>
+        <div class="columns is-mobile is-multiline header-top">
+          <div class="column is-half-desktop is-full-mobile header-top__left">
+            <h3 class="title left" style="margin-bottom: 0">{{ album.title }}</h3>
             <div>
-              <time>23 Jun 2019</time>
+              <time>{{ album.date.toString() }}</time>
             </div>
           </div>
-          <div class="column has-text-right is-6 header-top__right">
-            <div class="btn-favorite">
+          <div class="column has-text-right is-half-desktop is-full-mobile header-top__right">
+            <div
+              class="btn-favorite"
+              @click="onToggleFavorite(album.id)"
+            >
               <b-icon
                 pack="fas"
                 icon="star"
                 size="is-small"
+                :type="album.isFavorite ? 'is-warning' : ''"
               >
               </b-icon>
-              <div class="favorite-text">Favorite Album</div>
+              <div class="favorite-text">{{ album.isFavorite ? 'Unfavorite Album' : 'Favorite Album' }}</div>
             </div>
             <div>
               <b-icon
@@ -29,14 +33,14 @@
             </div>
           </div>
         </div>
-         <div class="columns is-mobile header-bottom">
-          <div class="column is-6 header-bottom__left">
-            <p style="margin-bottom: 0">Content here</p>
+         <div class="columns is-mobile is-multiline header-bottom">
+          <div class="column is-half-desktop is-full-mobile header-bottom__left">
+            <p style="margin-bottom: 0">{{ album.description }}</p>
           </div>
-          <div class="column has-text-right is-6 header-bottom__right">
+          <div class="column has-text-right is-half-desktop is-full-mobile header-bottom__right">
             <ul class="meta-list">
-              <li class="meta-list__item">2 Photos</li>
-              <li class="meta-list__item">2 Videos</li>
+              <li class="meta-list__item">{{ album.photos.length }} Photos</li>
+              <!-- <li class="meta-list__item">2 Videos</li> -->
             </ul>
           </div>
         </div>
@@ -44,6 +48,19 @@
     </div>
   </div>
 </template>
+<script>
+ import { mapMutations } from 'vuex'
+  export default {
+    props: {
+      album: Object
+    },
+    methods: {
+      ...mapMutations({
+        'onToggleFavorite': 'TOGGLE_FAVORITE_ALBUM'
+      })
+    },
+  }
+</script>
 
 <style lang="scss" scoped>
   .card--header-album-detail {

@@ -1,7 +1,7 @@
 <template>
-  <div class="detail">
-    <HeaderAlbumDetail />
-    <ListPhotos />
+  <div class="detail" v-if="album && album.id">
+    <header-album-detail :album="album"/>
+    <list-photos :photos="album.photos"/>
   </div>
 </template>
 <script>
@@ -17,14 +17,13 @@
     computed: {
       ...mapGetters(['albumDetail']),
       album () {
-        console.log(this.albumDetail(this.$route.params))
-        return []
+        if(this.$route.params.album_id) {
+          const value = this.albumDetail(this.$route.params.album_id)
+          return value;
+        }
+        return null;
       }
     },
-    mounted() {
-      console.log('HeaderAlbumDetail',this.$route.params)
-      
-    }
   }
 </script>
 

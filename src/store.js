@@ -22,6 +22,8 @@ const mutationsTypes = {
   ADD_NEW_PHOTO_PENDING: 'ADD_NEW_PHOTO_PENDING',
   ADD_NEW_PHOTO_SUCCESS: 'ADD_NEW_PHOTO_SUCCESS',
   ADD_NEW_PHOTO_ERRORED: 'ADD_NEW_PHOTO_ERRORED',
+  TOGGLE_FAVORITE_ALBUM: 'TOGGLE_FAVORITE_ALBUM',
+  TOGGLE_LIKE_PHOTO: 'TOGGLE_LIKE_ALBUM',
 };
 
 export default new Vuex.Store({
@@ -38,13 +40,31 @@ export default new Vuex.Store({
     [mutationsTypes.GENERATE_ALBUMS_SUCCESS](state, listAlbums) {
       state.isAppLoading = false;
       state.listAlbums = [].concat(listAlbums);
+    },
+    [mutationsTypes.TOGGLE_FAVORITE_ALBUM](state, album_id) {
+      const current = state.listAlbums.find(album => album.id === album_id);
+      if(current) {
+        current.isFavorite = !current.isFavorite;
+      }
+    },
+    [mutationsTypes.TOGGLE_LIKE_PHOTO](state, { album_id, photo_id }) {
+      if(!album_id || !photo_id) return;
+
+      const current = state.listAlbums.find(album => album.id === album_id);
+      if(current && current.photos && Array.isArray(current.photos)) {
+        const { photos } = current;
+        const currentPhoto = photos.find(photo => photo.id === photo_id);
+        if(currentPhoto) {
+          currentPhoto.isLike = !currentPhoto.isLike;
+        }
+      }
     }
   },
   actions: {
     [actionsTypes.GENERATE_ALBUMS]({ commit }) {
       commit(mutationsTypes.GENERATE_ALBUMS_PENDING);
       setTimeout(() => {
-        commit(mutationsTypes.GENERATE_ALBUMS_SUCCESS, generateListAlbums(faker.random.number({ min: 1, max: 12 })));
+        commit(mutationsTypes.GENERATE_ALBUMS_SUCCESS, generateListAlbums(faker.random.number({ min: 1, max: 100 })));
       }, 500)
     }
   },

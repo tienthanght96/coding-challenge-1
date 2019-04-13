@@ -4,8 +4,8 @@
       <div class="column is-one-quarter-desktop is-one-third-tablet is-full-mobile">
         <new-photo-card />
       </div>
-      <div v-for="(item, index) in 6" :key="index" class="column is-one-quarter-desktop is-one-third-tablet is-full-mobile">
-        <photo-card />
+      <div v-for="(photo) in photos" :key="photo.id" class="column is-one-quarter-desktop is-one-third-tablet is-full-mobile">
+        <photo-card :photo="photo"/>
       </div>
     </div>
   </div>
@@ -17,6 +17,9 @@
     components: {
       PhotoCard,
       NewPhotoCard
+    },
+    props: {
+      photos: Array
     }
   }
 </script>

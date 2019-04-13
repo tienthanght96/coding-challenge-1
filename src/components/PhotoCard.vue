@@ -2,17 +2,19 @@
   <div class="card card--photo-custom">
     <div
       class="card-image"
-      style="background-image: url(https://bulma.io/images/placeholders/1280x960.png)"
+      :style="`background-image: url('${photo.imageUrl}')`"
       @click="onOpenLightBox"
     >
     </div>
     <div class="card-actions">
-      <div class="btn-like">
+      <div class="btn-like"
+        @click="onToggleLike({ album_id: photo.album_id, photo_id: photo.id })"
+      >
         <b-icon
           pack="fas"
           icon="heart"
           size="is-small"
-          type="is-white"
+          :type="photo.isLike ? 'is-danger' : 'is-white'"
         >
         </b-icon>
       </div>
@@ -22,11 +24,15 @@
 </template>
 
 <script>
+  import { mapMutations } from 'vuex'
   import PhotoLightBox from '@/components/PhotoLightBox.vue';
 
   export default {
     components: {
       PhotoLightBox
+    },
+    props: {
+      photo: Object
     },
     data(){
       return {
@@ -38,9 +44,9 @@
       onOpenLightBox() {
         this.isOpenLightBox = !this.isOpenLightBox;
       },
-      onLike(){
-        console.log('12312')
-      }
+      ...mapMutations({
+        'onToggleLike': 'TOGGLE_LIKE_ALBUM'
+      })
     },
   }
 </script>
