@@ -1,27 +1,19 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import faker from 'faker'
-import { generateListAlbums } from './utils/seedData';
+import { generateListAlbums, generateNewAlbum, getLastIndex, generateNewPhoto } from './utils/seedData';
 
 Vue.use(Vuex);
 
 const actionsTypes = {
   GENERATE_ALBUMS: 'GENERATE_ALBUMS',
-  ADD_NEW_ALBUM: 'ADD_NEW_ALBUM',
-  ADD_NEW_PHOTO: 'ADD_NEW_PHOTO',
-  ADD_TAGS_PHOTO: 'ADD_TAGS_PHOTO',
 };
 const mutationsTypes = {
-  
   GENERATE_ALBUMS_PENDING: 'GENERATE_ALBUMS_PENDING',
   GENERATE_ALBUMS_SUCCESS: 'GENERATE_ALBUMS_SUCCESS',
   GENERATE_ALBUMS_ERRORED: 'GENERATE_ALBUMS_ERRORED',
-  ADD_NEW_ALBUM_PENDING: 'ADD_NEW_ALBUM_PENDING',
-  ADD_NEW_ALBUM_SUCCESS: 'ADD_NEW_ALBUM_SUCCESS',
-  ADD_NEW_ALBUM_ERRORED: 'ADD_NEW_ALBUM_ERRORED',
-  ADD_NEW_PHOTO_PENDING: 'ADD_NEW_PHOTO_PENDING',
-  ADD_NEW_PHOTO_SUCCESS: 'ADD_NEW_PHOTO_SUCCESS',
-  ADD_NEW_PHOTO_ERRORED: 'ADD_NEW_PHOTO_ERRORED',
+  ADD_NEW_ALBUM: 'ADD_NEW_ALBUM',
+  ADD_NEW_PHOTO: 'ADD_NEW_PHOTO',
   TOGGLE_FAVORITE_ALBUM: 'TOGGLE_FAVORITE_ALBUM',
   TOGGLE_LIKE_PHOTO: 'TOGGLE_LIKE_ALBUM',
 };
@@ -57,6 +49,21 @@ export default new Vuex.Store({
         if(currentPhoto) {
           currentPhoto.isLike = !currentPhoto.isLike;
         }
+      }
+    },
+    [mutationsTypes.ADD_NEW_ALBUM](state, { title, imageUrl }) {
+      const list = state.listAlbums;
+      const last_index = getLastIndex(list, 'index_album');
+      const album = generateNewAlbum({ title, imageUrl }, last_index);
+      state.listAlbums = [album].concat(list);
+    },
+    [mutationsTypes.ADD_NEW_PHOTO](state, { album_id, imageUrl }) {
+      const album = state.listAlbums.find(a => a.id === album_id);
+      if(album && album.id) {
+        const { photos } = album;
+        const last_index = getLastIndex(photos, 'index_photo');
+        const photo = generateNewPhoto(album_id, last_index, imageUrl);
+        album.photos = [photo].concat(photos);
       }
     }
   },

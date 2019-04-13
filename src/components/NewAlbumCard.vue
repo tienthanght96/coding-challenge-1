@@ -3,7 +3,10 @@
     <div class="card-image">
       <figure class="image is-4by3">
         <div class="card-create-container">
-          <div class="btn-create">
+          <div
+            class="btn-create"
+            @click="onOpenPopup"
+          >
             <b-icon
               pack="fas"
               icon="plus"
@@ -22,19 +25,24 @@
         </div>
       </div>
     </div>
+    <popup-new-album :isOpenModal="isOpenPopup" :onCloseModal="onOpenPopup" />
   </div>
 </template>
 
 <script>
+  import PopupNewAlbum from '@/components/PopupNewAlbum.vue';
   export default {
+    components: {
+      PopupNewAlbum
+    },
     data(){
       return {
-        isFavoriting: false,
+        isOpenPopup: false,
       }
     },
     methods: {
-      onFavorite(){
-        console.log('12312')
+      onOpenPopup() {
+        this.isOpenPopup = !this.isOpenPopup;
       }
     },
   }

@@ -5,7 +5,7 @@
         <list-albums :listAlbums="listAlbums" />
       </b-tab-item>
 
-      <b-tab-item label="Media">
+      <b-tab-item label="Media(0)">
         <b-message title="Error !" type="is-info" :closable="false">
           OPPS NOT FOUND !
         </b-message>

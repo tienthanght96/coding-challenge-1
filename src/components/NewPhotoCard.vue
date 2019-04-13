@@ -2,7 +2,7 @@
   <div class="card card--create-photo">
     <div class="card-image">
       <div class="card-create-container">
-        <div class="btn-create" @click="onOpenModal">
+        <div class="btn-create" @click="onOpenPopup">
           <b-icon
             pack="fas"
             icon="plus"
@@ -16,19 +16,26 @@
     <div class="card-actions">
       <p class="title is-6">Add photo</p>
     </div>
+    <popup-new-photo :isOpenModal="isOpenPopup" :onCloseModal="onOpenPopup" />
+
   </div>
 </template>
 
 <script>
+  import PopupNewPhoto from '@/components/PopupNewPhoto.vue';
+
   export default {
     data(){
       return {
-        isOpenModal: false,
+        isOpenPopup: false,
       }
     },
+    components: {
+      PopupNewPhoto
+    },
     methods: {
-      onOpenModal(){
-        console.log('12312')
+      onOpenPopup() {
+        this.isOpenPopup = !this.isOpenPopup;
       }
     },
   }
@@ -49,7 +56,7 @@
       top: 0;
       left: 0;
       right: 0;
-      bottom: 0;
+      bottom: 40px;
       display: flex;
       align-items: center;
       justify-content: center;

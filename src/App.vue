@@ -1,6 +1,9 @@
 <template>
   <div id="app" class="container">
-    <router-view/>
+    <template v-if="isAppLoading">
+      <b-loading :active.sync="isAppLoading" />
+    </template>
+    <router-view v-else />
   </div>
 </template>
 <script>
@@ -14,7 +17,7 @@
       })
     },
      computed: {
-      ...mapGetters(['listAlbums']),
+      ...mapGetters(['listAlbums', 'isAppLoading']),
     },
     mounted(){
       this.getListAlbums()

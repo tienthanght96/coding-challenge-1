@@ -2,7 +2,7 @@
   <div class="card card--album-custom">
     <div class="card-image">
       <figure class="image is-4by3">
-        <router-link to="/album-detail">
+        <router-link :to="'/album-detail/' + album.id">
           <img v-if="mainImage" :src="mainImage" :alt="album.title">
         </router-link>
       </figure>
@@ -38,14 +38,10 @@
 
 <script>
   import { mapMutations } from 'vuex'
+
   export default {
     props: {
       album: Object,
-    },
-    data(){
-      return {
-        isFavoriting: false,
-      }
     },
     computed: {
       mainImage() {
@@ -53,7 +49,7 @@
         if(photos && Array.isArray(photos) && photos[0]) {
           return photos[0].imageUrl;
         }
-        return '';
+        return require('@/assets/no_image_available.png');
       }
     },
     methods: {

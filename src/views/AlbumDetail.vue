@@ -3,6 +3,18 @@
     <header-album-detail :album="album"/>
     <list-photos :photos="album.photos"/>
   </div>
+  <div v-else>
+    <b-notification
+      type="is-danger"
+      has-icon
+      icon-pack="fas"
+      :closable="false"
+      role="alert"
+    >
+      Album is not exist ! <br/>
+      <router-link to="/">Go to homepage</router-link>
+    </b-notification>
+  </div>
 </template>
 <script>
   import { mapGetters } from 'vuex';
