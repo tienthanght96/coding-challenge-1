@@ -1,5 +1,7 @@
 # coding-challenge-1
 
+Live Demo: https://coding-challenge-1.netlify.com/
+
 ## Project setup
 ```
 yarn install
