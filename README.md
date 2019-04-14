@@ -59,14 +59,14 @@ In my project I have used: <br >
   ─ Vue Router. It is the official router for Vue.js <br >
   ─ Vue-multiselect library for select tags of photo <br >
 
-I split the UI into many independent components to reuse easily.
-Example: 
+I split the UI into many independent components to reuse easily. <br>
+Example: <br>
  ─ home page includes: album card, create add album card, popup to create new album, list album card. <br>
  ─ album detail page includes: photo card, create add photo card, header of album detail, list photo card, popup add new photo and popup lightbox of photo to view some info of photo and user can edit them. <br>
 
-So I can use my components anywhere when i need them. 
+So I can use my components anywhere when i need them.  <br>
 
-Thanks for reading !
+Thanks for reading ! <br>
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
