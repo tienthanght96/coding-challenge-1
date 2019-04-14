@@ -70,6 +70,44 @@ Example: <br>
 
 So I can use my components anywhere when i need them.  <br>
 
+ ─ My data structure of albums list was designed for app have the following parttern:
+ ```
+  albums : [
+    {
+      id: String,
+      index_album: Number,
+      title: String,
+      date: String,
+      description: String,
+      isFavorite: Boolean,
+      photos: [
+        {
+          id: String,
+          album_id: String,
+          index_photo: Number,
+          imageUrl: String,
+          caption: String,
+          isLike: Boolean,
+          date: String,
+          tags: [
+            {
+              code: String,
+              name: String
+            }
+          ],
+          checkboxes: [
+            {
+              code: String,
+              name: String,
+              checked: Boolean
+            }
+          ]
+        }
+      ]
+    }
+  ] 
+```
+
 Thanks for reading ! <br>
 
 ### Customize configuration
