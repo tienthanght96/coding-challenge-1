@@ -51,5 +51,13 @@ my-app
       ── store.js
 ```
 
+In my project I have used:
+  ─ Buefy Lightweight UI components for Vue.js based on Bulma
+  ─ Vuex a state management pattern + library for Vue.js applications. I use it for management list albums, update album, update photos of album
+  ─ faker.js to generate radom fake data
+  ─ Vue Router. It is the official router for Vue.js
+  ─ Vue-multiselect library for select tags of photo
+  
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
