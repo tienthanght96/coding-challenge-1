@@ -16,6 +16,7 @@ const mutationsTypes = {
   ADD_NEW_PHOTO: 'ADD_NEW_PHOTO',
   TOGGLE_FAVORITE_ALBUM: 'TOGGLE_FAVORITE_ALBUM',
   TOGGLE_LIKE_PHOTO: 'TOGGLE_LIKE_ALBUM',
+  UPDATE_PHOTO: 'UPDATE_PHOTO'
 };
 
 export default new Vuex.Store({
@@ -65,13 +66,27 @@ export default new Vuex.Store({
         const photo = generateNewPhoto(album_id, last_index, imageUrl);
         album.photos = [photo].concat(photos);
       }
+    },
+    [mutationsTypes.UPDATE_PHOTO](state, { album_id, photo_id, data }) {
+      const album = state.listAlbums.find(a => a.id === album_id);
+      if(album && album.id) {
+        const { photos } = album;
+        const photo = photos.find(p => p.id === photo_id);
+        if(photo && photo.id) {
+          const newPhoto = { ...photo, ...data };
+          album.photos = photos.map(p => {
+            if(p.id !== photo_id) return p;
+            return newPhoto;
+          })
+        }
+      }
     }
   },
   actions: {
     [actionsTypes.GENERATE_ALBUMS]({ commit }) {
       commit(mutationsTypes.GENERATE_ALBUMS_PENDING);
       setTimeout(() => {
-        commit(mutationsTypes.GENERATE_ALBUMS_SUCCESS, generateListAlbums(faker.random.number({ min: 1, max: 100 })));
+        commit(mutationsTypes.GENERATE_ALBUMS_SUCCESS, generateListAlbums(faker.random.number({ min: 0, max: 100 })));
       }, 500)
     }
   },

@@ -11,7 +11,7 @@ export function generateListAlbums (total) {
       id: album_id,
       index_album: i,
       title: faker.name.title(),
-      date: faker.date.recent(),
+      date: faker.date.recent().toLocaleDateString(),
       description: faker.lorem.sentences(),
       isFavorite: faker.random.boolean(),
       photos: generateListPhotos(faker.random.number({ min: 0, max: 30 }), album_id)
@@ -36,10 +36,11 @@ export function generateListPhotos(totalPhotos, album_id) {
       album_id: album_id,
       index_photo: index,
       imageUrl: faker.random.image(),
-      caption: '',
-      tags: faker.lorem.words().split(' '),
+      caption: faker.lorem.sentences(),
       isLike: faker.random.boolean(),
-      date: faker.date.recent(),
+      date: faker.date.recent().toLocaleDateString(),
+      tags: generateListTags(),
+      checkboxes: generateCheckboxesPhoto()
     };
     return photo;
   });
@@ -51,7 +52,7 @@ export function generateNewAlbum(album_data, last_index) {
     id: album_id,
     index_album: (last_index + 1),
     title: album_data.title,
-    date: faker.date.recent(),
+    date: faker.date.recent().toLocaleDateString(),
     description: '',
     isFavorite: false,
     photos: [
@@ -68,9 +69,25 @@ export function generateNewPhoto(album_id, last_index, imageUrl) {
     index_photo: last_index + 1,
     imageUrl: imageUrl,
     caption: '',
-    tags: [],
+    tags: generateListTags(),
+    checkboxes: generateCheckboxesPhoto(),
     isLike: false,
-    date: faker.date.recent(),
+    date: faker.date.recent().toLocaleDateString(),
   };
   return photo;
+}
+
+export function generateListTags() {
+  return Array.from(Array(faker.random.number({ min: 0, max: 20 })).keys()).map(t => ({
+    code: faker.random.uuid(),
+    name: faker.random.word()
+  }));
+}
+
+export function generateCheckboxesPhoto() {
+  return Array.from(Array(faker.random.number({ min: 0, max: 7 })).keys()).map(t => ({
+    code: faker.random.uuid(),
+    name: faker.random.words(),
+    checked: faker.random.boolean()
+  }));
 }

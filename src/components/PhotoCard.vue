@@ -19,7 +19,7 @@
         </b-icon>
       </div>
     </div>
-    <photo-light-box :isOpenModal="isOpenLightBox" :onCloseModal="onOpenLightBox" />
+    <photo-light-box :isOpenModal="isOpenLightBox" :onCloseModal="onOpenLightBox" :photo="Object.assign({}, photo)"/>
   </div>
 </template>
 
