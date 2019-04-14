@@ -1,6 +1,6 @@
 # coding-challenge-1
 
-Live Demo: https://coding-challenge-1.netlify.com/
+### Live Demo: https://coding-challenge-1.netlify.com/
 
 ## Project setup
 ```
@@ -27,6 +27,8 @@ yarn run test
 yarn run lint
 ```
 
+### Project Structure: <br>
+
 ```
 my-app
 ├── README.md
@@ -52,7 +54,7 @@ my-app
       ── router.js
       ── store.js
 ```
-
+### Explanation <br>
 In my project I have used: <br >
   ─ Buefy Lightweight UI components for Vue.js based on Bulma <br >
   ─ Vuex a state management pattern + library for Vue.js applications.
